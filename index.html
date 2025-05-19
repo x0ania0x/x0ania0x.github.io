@@ -3,97 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Website</title>
+    <title>Professional Terminal</title>
     <style>
         body {
-            font-family: sans-serif;
+            background-color: #181818; /* Darker background */
+            color: #a9b1d1; /* Slightly softer main text color (lively blue-gray) */
+            font-family: 'Fira Code', monospace; /* Modern monospaced font (ensure it's available or use a fallback) */
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            padding: 30px;
+            display: flex;
+            flex-direction: column; /* Stack terminal and links */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 1em 0;
-            text-align: center;
+
+        /* Style for the links outside the terminal */
+        .external-links {
+            margin-top: 20px;
+            color: #c678dd; /* Lively purple for links */
         }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 1em;
-        }
-        nav a {
-            color: white;
+
+        .external-links a {
+            color: #98c379; /* Lively green for link text */
             text-decoration: none;
+            margin: 0 15px;
         }
-        .container {
+
+        .external-links a:hover {
+            text-decoration: underline;
+        }
+
+        .terminal {
+            background-color: #282c34; /* Slightly lighter terminal background */
+            border: 1px solid #3e4451;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
             max-width: 960px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 50vh; /* Adjust height if needed */
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
         }
-        .section {
-            margin-bottom: 20px;
+
+        .terminal-output {
+            flex-grow: 1;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+            overflow-y: auto;
+            color: #eee; /* Light gray for output text */
         }
-        h2 {
-            color: #333;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 0.5em;
-            margin-bottom: 1em;
+
+        .terminal-input {
+            display: flex;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid #3e4451;
         }
-        footer {
-            text-align: center;
-            padding: 1em 0;
-            background-color: #333;
-            color: white;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+
+        .prompt {
+            color: #e06c75; /* Lively red for prompt */
+            margin-right: 10px;
+        }
+
+        #terminalInput {
+            background: transparent;
+            border: none;
+            color: #d19a66; /* Lively orange for input text */
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1em;
+            flex-grow: 1;
+            outline: none;
+            padding: 5px 0;
+        }
+
+        #terminalInput::after {
+            content: '_';
+            display: inline-block;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { color: transparent }
+            50% { color: #56b6c2; } /* Lively cyan for cursor */
+        }
+
+        .command {
+            color: #61afef; /* Lively blue for commands */
+        }
+
+        .response {
+            color: #98c379; /* Lively green for responses */
+        }
+
+        .description {
+            color: #e6c07b; /* Lively yellow for description */
+            margin-bottom: 10px;
+        }
+
+        /* Link aliases are now hidden within the terminal output */
+        .link-alias {
+            display: none;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hHcdgBQ+hFhoCfouErMdlmG9rsQPDrkN37Ho6zxGOaPueYrZuTRDtuzlnx6tHXypTBYxvjxGmWjg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <header>
-        <h1>Welcome</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="container">
-        <section id="about" class="section">
-            <h2>About Me</h2>
-            <p>A highly talented and creative full-stack developer with a significant track record in 
-                designing and developing robust backend systems. I am passionate about building scalable
-                and efficient solutions that power complex web applications, leveraging cutting-edge 
-                technologies and architectural best practices.</p>
-        </section>
-
-        <section id="contact" class="section">
-            <h2>Contact Me</h2>
-            <p>Feel free to reach out if you have any questions or opportunities!</p>
-            <p>You can contact me via:</p>
-            <ul>
-                <li>Email: <a href="mailto:[Your Email Address]">[Your Email Address]</a></li>
-                <li>LinkedIn: <a href="[Your LinkedIn Profile URL]">My LinkedIn Profile</a></li>
-                <li>Twitter: <a href="[Your Twitter Profile URL]">@YourTwitterHandle</a></li>
-            </ul>
-        </section>
+    <div class="terminal">
+        <div class="terminal-output" id="terminalOutput">
+            <div class="description">
+                Welcome! I am a highly motivated and results-oriented professional with [Number] years of experience in [Your Field]. My expertise lies in [Specific Skill 1], [Specific Skill 2], and [Specific Skill 3]. I am passionate about [Your Passion] and always eager to tackle new challenges.
+            </div>
+            <div style="display: none;">
+                <span class="link-alias" data-url="[Your LinkedIn URL]">linkedin</span>
+                <span class="link-alias" data-url="[Your GitHub URL]">github</span>
+                <span class="link-alias" data-url="[Your Portfolio URL]">portfolio</span>
+                <span class="link-alias" data-email="[Your Email Address]">email</span>
+            </div>
+        </div>
+        <div class="terminal-input">
+            <span class="prompt">guest@choinska.com:~$</span>
+            <input type="text" id="terminalInput" placeholder="Type 'help' for available commands">
+        </div>
     </div>
 
-    <footer>
-        <p>&copy; 2025 [Anna Choinska-Hasbi]. All rights reserved.</p>
-    </footer>
+    <div class="external-links">
+        <a href="[Your LinkedIn URL]" target="_blank">LinkedIn</a> |
+        <a href="mailto:anna.choinska@gmail.com">Email</a>
+    </div>
+
+    <script>
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalOutput = document.getElementById('terminalOutput');
+        const prompt = document.querySelector('.prompt').textContent;
+        const descriptionHTML = `
+            <div class="description">
+              A highly talented and creative full-stack developer with a significant track record in designing and developing robust backend systems. I am passionate about building scalable and efficient solutions that power complex web applications, leveraging cutting-edge technologies and architectural best practices.
+            </div>
+        `;
+        const linkAliases = document.querySelectorAll('.link-alias');
+
+        // Function to append output to the terminal
+        function appendOutput(text, className = 'response') {
+            terminalOutput.innerHTML += `<div class="${className}">${text}</div>`;
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+
+        terminalInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const command = terminalInput.value.trim();
+                appendOutput(`${prompt} ${command}`, 'command');
+                terminalInput.value = '';
+
+                let response = '';
+                if (command === 'help') {
+                    response = 'Available commands: help, clear, whoami, uname, open [link alias]';
+                } else if (command === 'clear') {
+                    terminalOutput.innerHTML = descriptionHTML;
+                    // Re-display the hidden link aliases after clearing
+                    linkAliases.forEach(alias => terminalOutput.appendChild(alias));
+                } else if (command === 'whoami') {
+                    response = 'guest'; // You can customize this
+                } else if (command === 'uname') {
+                    response = 'Professional Terminal v1.1 (Web)';
+                } else if (command.startsWith('open ')) {
+                    const alias = command.substring(5).trim();
+                    let opened = false;
+                    linkAliases.forEach(aliasElement => {
+                        if (aliasElement.textContent === alias && aliasElement.dataset.url) {
+                            window.open(aliasElement.dataset.url, '_blank');
+                            response = `Opening: ${alias}`;
+                            opened = true;
+                        } else if (aliasElement.textContent === alias && aliasElement.dataset.email) {
+                            window.location.href = `mailto:${aliasElement.dataset.email}`;
+                            response = `Opening email to: ${alias}`;
+                            opened = true;
+                        }
+                    });
+                    if (!opened) {
+                        response = `Error: Unknown alias '${alias}'`;
+                    }
+                } else if (command !== '') {
+                    response = `Command not found: ${command}`;
+                }
+
+                if (response) {
+                    appendOutput(response);
+                }
+            }
+        });
+
+        // Set focus on the input field when the page loads
+        window.onload = function() {
+            terminalInput.focus();
+        };
+
+        // Prevent the input field from losing focus on click
+        document.addEventListener('click', function() {
+            terminalInput.focus();
+        });
+    </script>
 </body>
 </html>
